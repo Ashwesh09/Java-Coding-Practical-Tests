@@ -1,0 +1,37 @@
+Coding Practice Assessment 4
+
+Q1.
+
+// You are using Java
+class Main{
+    public static void main(String[] args){
+        int[] a = new int[2];
+        try{
+            int temp = a[3];
+        }
+        catch(Exception e){
+            System.out.println("java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 2");
+        }
+    }
+}
+
+
+
+Q2.
+
+// You are using Java
+import java.util.Scanner;
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int m = sc.nextInt();
+        if(m >= 2 && m <= 5)
+            System.out.println("The entered month is in the Summer");
+        else if(m >= 6 && m <= 9)
+            System.out.println("The entered month is in the Spring");
+        else if( ( m >= 10 && m <= 12 ) || m == 1 )
+            System.out.println("The entered month is in the Winter");
+        else
+            System.out.println("The entered month is in the Bogus Month");
+    }
+}

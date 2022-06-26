@@ -1,0 +1,62 @@
+Coding Practice Assessment 5
+
+Q1.
+	
+// You are using Java
+import java.util.Scanner;
+import java.sql.*;
+class Main{
+    public static void main(String[] args) throws Exception{
+        Class.forName("com.mysql.jdbc.Driver");
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String url = "jdbc:mysql://localhost/ri_db";
+        String user = "test";
+        String password = "test123";
+        String dname;
+
+        try (Connection con = DriverManager.getConnection(url, user, password);
+                Statement st = con.createStatement();) {
+            for(int i = 0 ; i < n ; i++){
+                int sid = sc.nextInt();
+                sc.nextLine();
+                String sname = sc.nextLine();
+                dname = sc.nextLine();
+                String address = sc.nextLine();
+                Double gpa = sc.nextDouble();
+                String showTableQ = "INSERT INTO BILL VALUES ("+sid+",'"+sname+"','"+dname+"','"+address+"',"+gpa+")";
+                st.executeUpdate(showTableQ);
+            }
+            sc.nextLine();
+            dname = sc.nextLine();
+            
+            String showTableQ = "SELECT * FROM BILL WHERE dname LIKE '"+dname+"'";
+            ResultSet res =st.executeQuery(showTableQ);
+            Boolean gotStd = false;
+            while (res.next()) {
+                int id = res.getInt("sid");
+                String sname = res.getString("sname");
+                dname = res.getString("dname");
+                String address = res.getString("address");
+                Double gpa = res.getDouble("gpa");
+                System.out.println(id+" "+sname+" "+dname+" "+address+" "+gpa);
+                gotStd = true;
+            }
+            if(!gotStd)
+                System.out.println("No students in "+dname+" department");
+            
+        }
+    }
+}
+
+
+Q2.
+
+// You are using Java
+import java.util.Scanner;
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println(sc.nextInt()+sc.nextInt());
+    }
+}

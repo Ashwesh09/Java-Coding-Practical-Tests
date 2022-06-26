@@ -1,0 +1,43 @@
+Coding Practice Assessment 3
+Q1. 
+
+// You are using Java
+import java.util.Scanner;
+class Main{
+    public static void main(String[] args){
+        Scanner sc= new Scanner(System.in);
+        int num = sc.nextInt();
+        System.out.println("cube of "+num+" is "+ (num*num*num));
+    }
+}
+
+
+Q2.
+
+// You are using Java
+import java.util.Scanner;
+import java.sql.*;
+class Main{
+    public static void main(String[] args) throws Exception{
+        Class.forName("com.mysql.jdbc.Driver");
+        Scanner sc = new Scanner(System.in);
+        String bName = sc.nextLine();
+        String url = "jdbc:mysql://localhost/ri_db";
+        String user = "test";
+        String password = "test123";
+        String query = "DELETE FROM book WHERE name LIKE '"+bName+"'";
+
+        try (Connection con = DriverManager.getConnection(url, user, password);
+                PreparedStatement st = con.prepareStatement(query)) {
+            st.execute();
+            String showTableQ = "SELECT * FROM book";
+            ResultSet res =st.executeQuery(showTableQ);
+            while (res.next()) {
+                int id = res.getInt("Id");
+                String name = res.getString("name");
+                String author = res.getString("author");
+                System.out.println(id+" "+name+" "+author);
+            }
+        }
+    }
+}

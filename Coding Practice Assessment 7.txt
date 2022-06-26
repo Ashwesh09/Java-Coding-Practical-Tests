@@ -1,0 +1,77 @@
+Coding Practice Assessment 7
+
+
+Q1.
+
+
+// You are using Java
+class FileReader{
+    public static Map<Integer, String>
+    sortByKey(Map<Integer, String> hm)
+    {
+        List<Map.Entry<Integer, String> > list
+            = new LinkedList<Map.Entry<Integer, String> >(
+                hm.entrySet());
+        Collections.sort(
+            list,
+            (i1, i2) -> i1.getKey().compareTo(i2.getKey()));
+        HashMap<Integer, String> temp
+            = new LinkedHashMap<Integer, String>();
+        for (Map.Entry<Integer, String> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
+    }
+    public static void main(String[] args) throws Exception{
+    FileCreation fc = new FileCreation();
+    fc.createFile();
+    File inFile = new File("File1.txt");
+    BufferedReader reader = new BufferedReader(new java.io.FileReader(inFile));
+    String line = null;
+    String[] data;
+    Map<Integer,String> sm = new HashMap<>();
+    BufferedWriter writer = new BufferedWriter(new java.io.FileWriter("File2.txt"));
+    while ((line=reader.readLine()) != null){
+        data = line.split("\\s");
+        int cId = Integer.parseInt(data[0]);
+        String name = data[1];
+        String email = data[2];
+        String phoneNumber = data[3];
+        String country = data[4];
+        String f = name+" "+cId+" "+email+" "+phoneNumber+" "+country;
+        sm.put(cId,f);
+    }
+    Map<Integer,String> map = sortByKey(sm);
+    Set s = map.entrySet();
+    Iterator i = s.iterator();
+    while (i.hasNext()) {
+            Map.Entry m = (Map.Entry)i.next();
+  
+            int key = (Integer)m.getKey();
+            String value = (String)m.getValue();
+  
+            writer.write(value);
+            System.out.println(value);
+        }
+
+
+
+
+Q2.
+
+
+// You are using Java
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<String> list = new ArrayList<>();
+        sc.nextLine();
+        for(int i = 0 ; i < n ; i++)
+            list.add(sc.nextLine());
+        Collections.sort(list);
+        for(String s : list)
+            System.out.println(s);
+    }
+}
